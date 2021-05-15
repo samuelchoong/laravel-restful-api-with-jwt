@@ -26,5 +26,7 @@ Route::namespace('App\Http\Controllers')->group(function(){
         Route::get('show/{recipe}','RecipeController@show')->name('recipe.show');
         Route::post('delete/{recipe}','RecipeController@delete')->name('recipe.delete');
     });
+
+    Route::post('transfer-balance','WalletController@transferBalance');
 });
 
