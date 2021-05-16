@@ -8,6 +8,7 @@ use App\Services\WalletService;
 use App\Jobs\BalanceTransferJob;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Queue;
 
 class WalletController extends Controller
 {
@@ -31,9 +32,10 @@ class WalletController extends Controller
         //     return response()->json(['success'=>false,'message'=>$e->getMessage()]);
         // }
         try{
+            $count = Queue::size('transfer-balance');
             dispatch(new BalanceTransferJob($request->fromWalletId,$request->toWalletId,$request->transferAmount))
             ->onQueue('transfer-balance')
-            ->delay(Carbon::now()->addSeconds(3));
+            ->delay(Carbon::now()->addSeconds($count*3));
             return response()->json([
                 'success' => true,
                 'message' => 'Balance transfer request has been submitted. Please wait for your transaction'

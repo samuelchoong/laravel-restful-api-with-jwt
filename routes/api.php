@@ -28,5 +28,8 @@ Route::namespace('App\Http\Controllers')->group(function(){
     });
 
     Route::post('transfer-balance','WalletController@transferBalance');
+    Route::get('/sequential', 'ConcurrentController@sequential');
+    Route::get('/concurrent', 'ConcurrentController@concurrent');
+    Route::get('/ownapi', 'ConcurrentController@ownapi');
 });
 
