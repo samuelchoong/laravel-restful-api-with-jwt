@@ -119,7 +119,7 @@ class RecipeTest extends TestCase
         $response = $this->withHeaders([
             'Authorization' => 'Bearer '. $this->token,
         ])->json('POST',route('recipe.delete',['recipe' => $recipe->id]));
-        $response->assertStatus(200);
+        $response->assertStatus(201 );
 
         //Assert there are no recipes
         $this->assertEquals(0,$this->user->recipes()->count());
