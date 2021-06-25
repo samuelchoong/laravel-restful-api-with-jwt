@@ -31,5 +31,9 @@ Route::namespace('App\Http\Controllers')->group(function(){
     Route::get('/sequential', 'ConcurrentController@sequential');
     Route::get('/concurrent', 'ConcurrentController@concurrent');
     Route::get('/ownapi', 'ConcurrentController@ownapi');
+
+    /** API Logs */
+    Route::get('/logs/get','LogsController@index')->middleware('log.route');
+    Route::post('/logs/post','LogsController@postMethod')->middleware('log.route');
 });
 
